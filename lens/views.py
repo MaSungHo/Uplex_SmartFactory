@@ -1,14 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
+from django.template import loader
+
 from .models import Instance
 
 # Create your views here.
 def index(request):
-    inst = Instance.objects.first()
-    return HttpResponse(inst.trt_lot_no)
+    instance_list = Instance.objects.all()
+    template = loader.get_template('lens/index.html')
+    context = {
+        'instance_list': instance_list,
+    }
+    return render(request, 'lens/index.html', context)
 
 def detail(request, instance_id):
-    return HttpResponse("You're looking at instance %i" %instance_id)
+    instance = get_object_or_404(Instance, pk=instance_id)
+    return render(request, 'lens/detail.html', {'instance': instance})
 
 def results(request, instance_id):
     response = "You're looking at the results of instance %i"

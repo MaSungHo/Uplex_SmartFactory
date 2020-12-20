@@ -20,3 +20,6 @@ class Instance(models.Model):
     material_cd_no = models.CharField(max_length=200)
     material_mat_nm = models.CharField(max_length=200)
     material_mat_emit_no = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.trt_lot_no
