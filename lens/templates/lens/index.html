@@ -1,4 +1,4 @@
-{% if instance_list %}
+<!-- {% if instance_list %}
     <ul>
     {% for instance in instance_list %}
         <li><a href="{% url 'lens:detail' instance.id %}">{{ instance.trt_lot_no }}</a></li>
@@ -6,4 +6,18 @@
     </ul>
 {% else %}
     <p>There is no instance in database.</p>
-{% endif %}
+{% endif %} -->
+<h1>렌즈 정확도 측정</h1>
+<form action="{% url 'lens:create' %}" method="post">
+  {% csrf_token %}
+  trt_lot_no: <input type="text" name="trt_lot_no" id=1> / prt_lot_no: <input type="text" name="prt_lot_no" id=2> <br><br>
+  treat.mch_no: <input type="text" name="treat_mch_no" id=3> / treat.trt_uptime: <input type="number" name="treat_trt_uptime" id=4> <br><br>
+  print.mch_no: <input type="text" name="print_mch_no" id=5> / print.prt_uptime: <input type="number" name="print_prt_uptime" id=6> <br><br>
+  print.raw_mat: <input type="text" name="print_raw_mat" id=7> / print.dry_no: <input type="text" name="print_dry_no" id=8> <br><br>
+  print.heat_treat: <input type="text" name="print_heat_treat" id=9> / print.prd_type: <input type="text" name="print_prd_type" id=10> <br><br>
+  mold.snd_mch_no: <input type="text" name="mold_snd_mch_no" id=11> / mold.snd_uptime: <input type="number" name="mold_snd_uptime" id=12> <br><br>
+  mold.snd_raw_mat: <input type="text" name="mold_snd_raw_mat" id=13> / mold.snd_dry_no: <input type="text" name="mold_snd_dry_no" id=14> <br><br>
+  mold.snd_heat: <input type="text" name="mold_snd_heat" id=15> / material.cd_no: <input type="text" name="material_cd_no" id=16> <br><br>
+  material.mat_nm: <input type="text" name="material_mat_nm" id=17> / material.mat_emit_no: <input type="text" name="material_mat_emit_no" id=18> <br><br>
+  <input type="submit" value="정확도 측정">
+</form>
