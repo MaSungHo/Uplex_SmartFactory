@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 import requests
+import json
 
 from .models import Instance
 
@@ -53,9 +54,9 @@ def create(request):
         }
     }
 
-    #predicted_res = requests.post("http://172.16.6.108:5000/uplex/predict")["predicted"][0]
-    predicted_res = requests.post("http://175.123.142.155:38888").status_code
-    ins.predicted=predicted_res
+    predicted_res = requests.post("http://172.16.6.108:5000/uplex/predict", headers = headers, data = json.dumps(params)).json()
+    #predicted_res = requests.post("http://175.123.142.155:38888").status_code
+    ins.predicted=predicted_res['predicted'][0]
     ins.save()
 
     return HttpResponseRedirect(reverse('lens:results', args=(ins.id, )))
