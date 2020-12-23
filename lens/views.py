@@ -5,10 +5,25 @@ from django.urls import reverse
 from django.http import *
 from .models import Image
 from .forms import ImageForm
+from pathlib import Path
 import requests
-import json
+import os, json
+from django.core.exceptions import ImproperlyConfigured
 
 from .models import Instance
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+secret_file = os.path.join(BASE_DIR, 'secrets.json') # secrets.json 파일 위치
+
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
 
 # Create your views here.
 def index(request):
@@ -55,8 +70,7 @@ def create(request):
         }
     }
 
-    #predicted_res = requests.post("http://172.16.6.108:5000/uplex/predict", headers = headers, data = json.dumps(params)).json()
-    predicted_res = requests.post("http://172.16.6.108:8000/predict", headers = headers, data = json.dumps(params)).json()
+    predicted_res = requests.post(get_secret("API_PATH"), headers = headers, data = json.dumps(params)).json()
     ins.predicted=predicted_res['predicted'][0]
     ins.save()
 
