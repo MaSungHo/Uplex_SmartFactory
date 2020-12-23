@@ -59,8 +59,8 @@ def create(request):
 
     return HttpResponseRedirect(reverse('lens:results', args=(ins.id, )))
 
-def detail(request, instance_id):
-    return render(request, 'lens/detail.html', {'instance': instance})
+def image(request):
+    return render(request, 'lens/image.html')
 
 def results(request, instance_id):
     instance = get_object_or_404(Instance, pk=instance_id)
