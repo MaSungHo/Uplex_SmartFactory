@@ -23,3 +23,6 @@ class Instance(models.Model):
     predicted = models.FloatField(default=0.0)
     def __str__(self):
         return self.trt_lot_no
+
+class Image(models.Model):
+    image = models.ImageField()

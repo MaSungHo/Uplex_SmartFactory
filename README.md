@@ -7,3 +7,7 @@ python version: 3.8.3 <br><br>
 
 <h3> 실행 명령어</h3>
 python manage.py runserver
+
+<h3> 실행 명령어</h3>
+Django의 ImageField를 사용하기 위해 Pillow 설치가 필요 <br>
+- <b>pip install Pillow</b> 

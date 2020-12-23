@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script>
-      var attributes = ['trt_lot_no', 'prt_lot_no', 'treat.mch_no', 'treat.trt_uptime', 'print.mch_no', 'print.prt_uptime',
-        'print.raw_mat', 'print.dry_no', 'print.heat_treat', 'print.prd_type', 'mold.snd_mch_no', 'mold.snd_uptime',
-        'mold.snd_raw_mat', 'mold.snd_dry_no', 'mold.snd_heat', 'material.cd_no', 'material.mat_nm', 'material.mat_emit_no']
-  </script>
   <style>
-    input:focus { outline: none; }
     #btn_group button{
       border: 1px solid black;
       background-color: rgba(0,0,0,0);
@@ -17,40 +11,10 @@
   </style>
 </head>
 <body>
-
-<h1>렌즈 정확도 측정</h1>
-<div>
-<form action="{% url 'lens:create' %}" method="post">
-  {% csrf_token %}
-  <table height="80px" border="1px solid black;">
-    <tbody>
-      <tr>
-        <th width="150px" height="50px" style=" text-align:center;">
-          특성
-        </th>
-        <th width="300px" height="50px" style="text-align:center;;">
-          입력 값
-        </th>
-      </tr>
-      <script>
-        for (var i = 0; i < 18; i++){
-          document.write('<tr style="border: solid 1px;">');
-          document.write('<td width="300px" height="50px" style="text-align:center;">');
-          document.write (attributes[i]);
-          document.write ('</td>');
-          document.write('<td width="300px" height="50px" style="text-align:center;">');
-          document.write('<input type="text" name="' + i + '" size="20" style="width:100%; border: 0;">');
-          document.write ('</td>');
-          document.write ('</tr>');
-        }
-      </script>
-    </tbody>
-  </table>
-  <br>
+  <h1>유플렉스</h1>
   <div id="btn_group">
-    <button type="submit">정확도 측정</button>&nbsp; &nbsp;<button type="reset">새로고침</button>
+    <button type="button" onClick="location.href='/predict/'"> 정보 입력하여 예측 </button>
+    <button type="button" onClick="location.href='/image/'"> 렌즈 이미지 예측 </button>
   </div>
-</form>
-</div>
 </body>
 </html>

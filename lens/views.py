@@ -2,6 +2,9 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
+from django.http import *
+from .models import Image
+from .forms import ImageForm
 import requests
 import json
 
@@ -9,12 +12,10 @@ from .models import Instance
 
 # Create your views here.
 def index(request):
-    instance_list = Instance.objects.all()
-    template = loader.get_template('lens/index.html')
-    context = {
-        'instance_list': instance_list,
-    }
-    return render(request, 'lens/index.html', context)
+    return render(request, 'lens/index.html')
+
+def predict(request):
+    return render(request, 'lens/predict.html')
 
 def create(request):
     instance = request.POST
@@ -61,8 +62,20 @@ def create(request):
 
     return HttpResponseRedirect(reverse('lens:results', args=(ins.id, )))
 
-def detail(request, instance_id):
-    return render(request, 'lens/detail.html', {'instance': instance})
+def image(request):
+    return render(request, 'lens/image.html')
+
+def decision(request):
+    image_form = ImageForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        if image_form.is_valid():
+            image = Image(image=request.FILES['image'])
+            image.save()
+            return render(request, 'lens/decision.html', {'image': image})
+        else:
+            raise Http404('올바르지 않은 요청입니다.')
+    else:
+        raise Http404('올바르지 않은 요청입니다.')
 
 def results(request, instance_id):
     instance = get_object_or_404(Instance, pk=instance_id)
