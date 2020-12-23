@@ -1,3 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    input:focus { outline: none; }
+    #btn_group button{
+      border: 1px solid black;
+      background-color: rgba(0,0,0,0);
+      color: black;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+
 <h1>예측 결과</h1>
 <p> {{ instance.predicted }} </p>
-<a href="{{request.META.HTTP_REFERER}}">뒤로가기</a>
+<div id="btn_group">
+  <button type="button" onClick="history.back()"> 이전 페이지로 </button>
+</div>
+</body>
+</html>
