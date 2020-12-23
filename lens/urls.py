@@ -8,5 +8,6 @@ urlpatterns = [
     path('predict/', views.predict, name='predict'),
     path('image/', views.image, name='image'),
     path('lens/', views.create, name='create'),
+    path('decision/', views.decision, name='decision'),
     path('results/<int:instance_id>/', views.results, name='results'),
 ]
