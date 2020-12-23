@@ -9,12 +9,10 @@ from .models import Instance
 
 # Create your views here.
 def index(request):
-    instance_list = Instance.objects.all()
-    template = loader.get_template('lens/index.html')
-    context = {
-        'instance_list': instance_list,
-    }
-    return render(request, 'lens/index.html', context)
+    return render(request, 'lens/index.html')
+
+def predict(request):
+    return render(request, 'lens/predict.html')
 
 def create(request):
     instance = request.POST

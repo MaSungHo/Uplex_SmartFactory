@@ -17,40 +17,6 @@
   </style>
 </head>
 <body>
-
-<h1>렌즈 정확도 측정</h1>
-<div>
-<form action="{% url 'lens:create' %}" method="post">
-  {% csrf_token %}
-  <table height="80px" border="1px solid black;">
-    <tbody>
-      <tr>
-        <th width="150px" height="50px" style=" text-align:center;">
-          특성
-        </th>
-        <th width="300px" height="50px" style="text-align:center;;">
-          입력 값
-        </th>
-      </tr>
-      <script>
-        for (var i = 0; i < 18; i++){
-          document.write('<tr style="border: solid 1px;">');
-          document.write('<td width="300px" height="50px" style="text-align:center;">');
-          document.write (attributes[i]);
-          document.write ('</td>');
-          document.write('<td width="300px" height="50px" style="text-align:center;">');
-          document.write('<input type="text" name="' + i + '" size="20" style="width:100%; border: 0;">');
-          document.write ('</td>');
-          document.write ('</tr>');
-        }
-      </script>
-    </tbody>
-  </table>
-  <br>
-  <div id="btn_group">
-    <button type="submit">정확도 측정</button>&nbsp; &nbsp;<button type="reset">새로고침</button>
-  </div>
-</form>
-</div>
+  <h1>유플렉스</h1>
 </body>
 </html>
