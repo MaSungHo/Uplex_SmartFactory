@@ -91,6 +91,9 @@ def decision(request):
     else:
         raise Http404('올바르지 않은 요청입니다.')
 
+def search(request):
+    return render(request, 'lens/search.html')
+
 def results(request, instance_id):
     instance = get_object_or_404(Instance, pk=instance_id)
     return render(request, 'lens/result.html', {'instance': instance})
