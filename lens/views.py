@@ -95,9 +95,9 @@ def decision(request):
 def search(request):
     client = InfluxDBClient(host=get_secret("DB_HOST"), port=get_secret("DB_PORT"), username=get_secret("DB_USERNAME"),
         password=get_secret("DB_PASSWORD"), database=get_secret("DB_NAME"))
-
-
-    return render(request, 'lens/search.html')
+    res = dict(client.query('SELECT * FROM "sensors", "thermo", "dust"').raw)
+    results = json.dumps(res)
+    return render(request, 'lens/search.html', {'results': results})
 
 def results(request, instance_id):
     instance = get_object_or_404(Instance, pk=instance_id)
