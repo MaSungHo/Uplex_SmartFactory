@@ -6,6 +6,7 @@ from django.http import *
 from .models import Image
 from .forms import ImageForm
 from pathlib import Path
+from influxdb import InfluxDBClient
 import requests
 import os, json
 from django.core.exceptions import ImproperlyConfigured
@@ -90,6 +91,13 @@ def decision(request):
             raise Http404('올바르지 않은 요청입니다.')
     else:
         raise Http404('올바르지 않은 요청입니다.')
+
+def search(request):
+    client = InfluxDBClient(host=get_secret("DB_HOST"), port=get_secret("DB_PORT"), username=get_secret("DB_USERNAME"),
+        password=get_secret("DB_PASSWORD"), database=get_secret("DB_NAME"))
+    res = dict(client.query('SELECT * FROM "sensors", "thermo", "dust"').raw)
+    results = json.dumps(res)
+    return render(request, 'lens/search.html', {'results': results})
 
 def results(request, instance_id):
     instance = get_object_or_404(Instance, pk=instance_id)

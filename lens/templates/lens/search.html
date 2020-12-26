@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style type="text/css">
+		table, tr, td{
+			border : 1px solid black;
+			text-align: center;
+		}
+		td{
+			width: 20px;
+		}
+
+    #btn_group button{
+      border: 1px solid black;
+      background-color: rgba(0,0,0,0);
+      color: black;
+      padding: 5px;
+    }
+	</style>
+</head>
+<body>
+
+<h1>데이터베이스 정보 조회</h1>
+  <script>
+    var data = JSON.parse("{{ results|escapejs }}");
+    for(i = 0; i < data["series"].length; i++) {
+      document.write("<h3>" + "테이블: " + data["series"][i]["name"] + "</h3>");
+      document.write("<table>");
+      document.write("<tr>");
+      for(col = 0; col < data["series"][i]["columns"].length; col++) {
+        console.log(data["series"][i]["columns"])
+        document.write("<td>" + data["series"][i]["columns"][col] + "</td>");
+      }
+      document.write("</tr>");
+      for(row = 0; row < data["series"][i]["values"].length; row++) {
+        document.write("<tr>");
+        for(val = 0; val < data["series"][i]["values"][row].length; val++) {
+          if(data["series"][i]["values"][row][val]) {
+            document.write("<td>" + data["series"][i]["values"][row][val] + "</td>");
+          } else {
+            document.write("<td></td>");
+          }
+        }
+        document.write("</tr>");
+      }
+      document.write("</table>");
+    }
+  </script>
+  <div id="btn_group">
+    <br><button type="button" onClick="history.back()"> 이전 페이지로 </button>
+  </div>
+</body>
+</html>
