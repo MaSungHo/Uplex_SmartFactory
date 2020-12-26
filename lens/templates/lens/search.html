@@ -9,6 +9,13 @@
 		td{
 			width: 20px;
 		}
+
+    #btn_group button{
+      border: 1px solid black;
+      background-color: rgba(0,0,0,0);
+      color: black;
+      padding: 5px;
+    }
 	</style>
 </head>
 <body>
@@ -16,7 +23,6 @@
 <h1>데이터베이스 정보 조회</h1>
   <script>
     var data = JSON.parse("{{ results|escapejs }}");
-    document.write(data["series"][0]["columns"])
     for(i = 0; i < data["series"].length; i++) {
       document.write("<h3>" + "테이블: " + data["series"][i]["name"] + "</h3>");
       document.write("<table>");
@@ -40,6 +46,8 @@
       document.write("</table>");
     }
   </script>
-
+  <div id="btn_group">
+    <br><button type="button" onClick="history.back()"> 이전 페이지로 </button>
+  </div>
 </body>
 </html>
