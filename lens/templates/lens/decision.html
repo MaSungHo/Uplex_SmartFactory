@@ -15,8 +15,11 @@
 <h1>예측 결과</h1>
 
 <img src="{{image.image.url}}"  width="500px" height="500px"/>
-<h3>렌즈 불량 유무: </h3>
-<h3>불량 종류: </h3>
+{% if result == 0 %}
+  <h3>렌즈 불량 유무: 정상</h3>
+{% else %}
+  <h3>렌즈 불량 유무: 불량</h3>
+{% endif %}
 <div id="btn_group">
     <button type="button" onClick="history.back()"> 이전 페이지로 </button>
 </div>

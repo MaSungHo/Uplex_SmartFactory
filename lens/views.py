@@ -3,13 +3,28 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from django.http import *
+from django.conf import settings
+import joblib
+import pickle
+import sklearn
+import cv2
+import math
+from numba import jit
+import PIL.Image as pilimg
 from .models import Image
 from .forms import ImageForm
 from pathlib import Path
 from influxdb import InfluxDBClient
 import requests
 import os, json
+import numpy as np
 from django.core.exceptions import ImproperlyConfigured
+from sklearn.metrics import accuracy_score
+from sklearn import svm
+from sklearn.model_selection import GridSearchCV
+from sklearn.decomposition import PCA
+from sklearn.svm import SVC
+
 
 from .models import Instance
 
@@ -25,6 +40,24 @@ def get_secret(setting, secrets=secrets):
     except KeyError:
         error_msg = "Set the {} environment variable".format(setting)
         raise ImproperlyConfigured(error_msg)
+
+@jit
+def blacking(img) :
+  img = cv2.medianBlur(img,5)
+  cimg = cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
+
+  circles = cv2.HoughCircles(img, cv2.HOUGH_GRADIENT, 1, 400, param1=50, param2=25, minRadius=400, maxRadius=0)
+
+  circles = np.uint16(np.around(circles))
+
+  x, y, r = circles[0,:][0]
+  rows, cols = img.shape
+
+  for i in range(cols):
+    for j in range(rows):
+      if math.hypot(i-x, j-y) > r:
+        img[j,i] = 0
+  return img
 
 # Create your views here.
 def index(request):
@@ -86,7 +119,21 @@ def decision(request):
         if image_form.is_valid():
             image = Image(image=request.FILES['image'])
             image.save()
-            return render(request, 'lens/decision.html', {'image': image})
+
+            img = cv2.imread(image.image.path, 0)
+            img = blacking(img)
+            img = cv2.resize(img, (512,512))
+            img = img.reshape(512 * 512)
+            source_img = []
+            source_img.append(img)
+
+            pca = joblib.load(os.path.join(settings.MEDIA_ROOT, 'PCA.pkl'))
+            source_img = pca.transform(source_img)
+            
+            svm = joblib.load(os.path.join(settings.MEDIA_ROOT, 'SVM_Model.pkl'))
+            result = svm.predict(source_img)
+
+            return render(request, 'lens/decision.html', {'image': image, 'result': result[0]})
         else:
             raise Http404('올바르지 않은 요청입니다.')
     else:
