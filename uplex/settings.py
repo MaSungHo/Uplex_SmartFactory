@@ -37,7 +37,7 @@ SECRET_KEY = get_secret("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', get_secret("SERVER_IP")]
+ALLOWED_HOSTS = ['localhost', get_secret("SERVER_IP1"), get_secret("SERVER_IP2")]
 
 
 # Application definition
