@@ -105,7 +105,7 @@ def create(request):
     }
 
     predicted_res = requests.post(get_secret("API_PATH"), headers = headers, data = json.dumps(params)).json()
-    ins.predicted=predicted_res['predicted'][0]
+    ins.predicted=predicted_res['predicted'][0] * 100
     ins.save()
 
     return HttpResponseRedirect(reverse('lens:results', args=(ins.id, )))
