@@ -1,4 +1,6 @@
 from django.db import models
+import os
+from django.conf import settings
 
 # Create your models here.
 class Instance(models.Model):
@@ -26,3 +28,7 @@ class Instance(models.Model):
 
 class Image(models.Model):
     image = models.ImageField()
+
+    def delete(self, *args, **kwargs):
+        os.remove(os.path.join(settings.MEDIA_ROOT, self.image.name))
+        super(Image, self).delete(*args, **kwargs)

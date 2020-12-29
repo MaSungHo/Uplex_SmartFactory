@@ -6,9 +6,12 @@ app_name = 'lens'
 urlpatterns = [
     path('', views.index, name='index'),
     path('predict/', views.predict, name='predict'),
-    path('image/', views.image, name='image'),
-    path('lens/', views.create, name='create'),
-    path('decision/', views.decision, name='decision'),
+    path('image/select/', views.select, name='select'),
+    path('image/single/', views.single_image, name='single_image'),
+    path('image/group/', views.group_images, name='group_image'),
+    path('single/decision/', views.decision, name='decision'),
+    path('group/decision/', views.decisions, name='decisions'),
     path('search/', views.search, name='search'),
-    path('results/<int:instance_id>/', views.results, name='results'),
+    path('results/', views.results, name='results'),
+    path('delete/', views.delete, name='delete')
 ]

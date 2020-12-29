@@ -2,5 +2,7 @@ from django import forms
 from .models import Image
 
 class ImageForm(forms.Form):
-    class Meta:
-        model = Image
+  image = forms.ImageField(label="Image")
+  class Meta:
+    model = Image
+    fields = ('image', )

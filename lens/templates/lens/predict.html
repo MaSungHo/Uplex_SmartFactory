@@ -30,7 +30,7 @@
 <div>
 <br>
 <div style="margin-left: 20px;">
-  <form action="{% url 'lens:create' %}" method="post">
+  <form action="{% url 'lens:results' %}" method="post">
     {% csrf_token %}
     <table height="80px" border="1px solid black;">
       <tbody>
@@ -58,8 +58,9 @@
     </table>
     <br>
     <div id="btn_group">
-      <button type="submit">합격률 예측</button>&nbsp; &nbsp;<button type="reset">새로고침</button>&nbsp;&nbsp;
-      <button type="button" onClick="history.back()"> 이전 페이지로 </button>
+      <button type="submit">합격률 예측</button>&nbsp; &nbsp;
+      <button type="reset">새로고침</button>&nbsp;&nbsp;
+      <button type="button" onClick="history.back()"> 이전 페이지로 </button><br><br><br>
     </div>
   </form>
   </div>

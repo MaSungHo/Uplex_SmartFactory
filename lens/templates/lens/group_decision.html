@@ -1,36 +1,26 @@
 <!DOCTYPE html>
+{% load static  %} 
 <html>
-  {% load static  %}
 <head>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="{% static 'css/lens.css' %}">
-  <style>
-    #btn_group button{
-      border: 1px solid black;
-      background-color: rgba(0,0,0,0);
-      color: black;
-      padding: 5px;
-    }
-  </style>
 </head>
-<body>
 <div class="page-header">
-  <h1 style="color: white;">판정 결과</h1>
+  <h1 style="color: white;">판정 결과</a></h1>
 </div>
 <br>
-<div style="margin-left: 20px;">
-  <img src="{{image.image.url}}"  width="500px" height="500px"/> <br>
-  {% if result == 0 %}
-    <br><h3>판정 결과: <b style="color: blue">정상</b></h3>
-  {% else %}
-    <br><h3>판정 결과: <b style="color: red">불량</b></h3>
-  {% endif %}
-  <div id="btn_group">
-      <button type="button" onClick="history.back()"> 이전 페이지로 </button>
-  </div>
-</div>
+<body>
+  {% block content %}
+    <div style="margin-left: 20px;">
+      <img src="data:image/png;base64,{{ data }}">
+      <div id="btn_group">
+        <button type="button" onClick="history.back()"> 이전 페이지로 </button>
+        <button type="button" onClick="location.href='/'"> 메인 페이지로 </button><br><br><br>
+    </div>
+    </div>
+  {% endblock %}
 </body>
 </html>
