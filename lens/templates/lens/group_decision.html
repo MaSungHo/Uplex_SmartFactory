@@ -14,12 +14,22 @@
 <br>
 <body>
   {% block content %}
-    <div style="margin-left: 20px;">
-      <img src="data:image/png;base64,{{ data }}">
+    <div style="margin-left: 150px; margin-right: 110px;">
+      {{ mode }}
+      {% for image, result in predictions %}
+        <figure style="display:inline-block;">
+          <img src="{{ image.image.url }}" width="120px" height="100px">
+          {% if result == 0 %}  
+            <figcaption style="color:blue; text-align: center;"><b>정상</b></figcaption>
+          {% else %}
+            <figcaption style="color:red; text-align: center;"><b>불량</b></figcaption>
+          {% endif %}
+        </figure>
+      {% endfor %}
       <div id="btn_group">
         <button type="button" onClick="history.back()"> 이전 페이지로 </button>
         <button type="button" onClick="location.href='/'"> 메인 페이지로 </button><br><br><br>
-    </div>
+      </div>
     </div>
   {% endblock %}
 </body>

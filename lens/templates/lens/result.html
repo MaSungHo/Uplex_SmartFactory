@@ -23,7 +23,7 @@
 </div>
 <br> 
 <div style="margin-left: 20px; font-size: large;">
-  예측값: <b> {{ prediction }}% </b> <br>
+  예측값: <b> {{ prediction|floatformat:2 }}% </b> <br>
   <div id="btn_group">
     <br><button type="button" onClick="history.back()"> 이전 페이지로 </button>
     <button type="button" onClick="location.href='/'"> 메인 페이지로 </button><br><br><br>
