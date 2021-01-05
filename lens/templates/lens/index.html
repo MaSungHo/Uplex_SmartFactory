@@ -1,21 +1,24 @@
 <!DOCTYPE html>
+{% load static  %} 
 <html>
 <head>
-  <style>
-    #btn_group button{
-      border: 1px solid black;
-      background-color: rgba(0,0,0,0);
-      color: black;
-      padding: 5px;
-    }
-  </style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'css/lens.css' %}">
 </head>
+<div class="page-header">
+  <h1><a href="http://www.uplexsoft.com/" class="external_link">Uplexsoft - 지능형 제조 공정.품질관리 서비스</a></h1>
+</div>
 <body>
-  <h1>Uplexsoft - 스마트공장</h1>
-  <div id="btn_group">
-    <button type="button" onClick="location.href='/predict/'"> 정보 입력하여 예측 </button>
-    <button type="button" onClick="location.href='/image/'"> 렌즈 이미지 예측 </button>
-    <button type="button" onClick="location.href='/search/'"> 데이터베이스 정보 조회 </button>
-  </div>
+  {% block content %}
+    <div class="page-button">
+      <button type="button" onClick="location.href='/predict/'"> 검사 합격률 예측 서비스 </button>
+      <button type="button" onClick="location.href='/image/select/'"> 자동 불량 판별 서비스 </button>
+      <button type="button" onClick="location.href='/search/'"> IoT 데이터 조회 </button>
+      <button type="button" onClick="location.href='/delete/'"> 저장된 이미지 삭제 </button>
+    </div>
+  {% endblock %}
 </body>
 </html>
