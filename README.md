@@ -12,10 +12,7 @@ python manage.py runserver
 
 <h3> - 이미지 모듈 </h3>
 Django의 ImageField를 사용하기 위해 Pillow 설치가 필요 <br>
-- <b>pip install Pillow</b> 
-
-<h3> - InfluxDB </h3>
-현재 로컬에서 InfluxDB를 설치하여 사용
+- <b>pip install Pillow</b> <br>
 
 <h3> - Docker </h3>
 Docker version: Client: Docker Engine - Community <br>
